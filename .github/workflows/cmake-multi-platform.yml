@@ -29,17 +29,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         build_type: [Release]
-        c_compiler: [gcc, cl]
-        cpp_compiler: [g++, cl]
         platform:
           - os: windows
-            c_compiler: cl
-            cpp_compiler: cl
             arch: x86_64
             artifact: cont-windows-x86_64.zip
           - os: linux
-            c_compiler: gcc
-            cpp_compiler: g++
             arch: x86_64
             artifact: cont-linux-x86_64.tar.gz
 
