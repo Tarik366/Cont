@@ -63,7 +63,7 @@ jobs:
       run: |
         cd docker/${{ matrix.platform.os }}
         docker build --build-arg ARCH=${{ matrix.platform.arch }} -t cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }} .
-
+        
     - name: Run Docker container
       run: |
         docker run -v "${{ github.workspace }}:/cont" -v "${{ github.workspace }}/build:/install" cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }}
