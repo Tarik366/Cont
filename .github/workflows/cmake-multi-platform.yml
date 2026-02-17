@@ -107,6 +107,16 @@ jobs:
           path: ./release-artifacts
           merge-multiple: true # Tüm zip dosyalarını tek klasöre toplar
 
+      - name: Delete Old Release and Tag
+        uses: dev-drprasad/delete-tag-and-release@v1.1
+        with:
+          tag_name: continuous
+          delete_release: true
+          github_token: ${{ secrets.GH_TOKEN }}
+      
+      - name: Wait for deletion
+        run: sleep 5
+
       - name: List files (Debug)
         run: ls -R ./release-artifacts
       - uses: softprops/action-gh-release@v2
