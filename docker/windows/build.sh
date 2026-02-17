@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-
+ls .
 mkdir /build
 cmake -S /cont -B /build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=/mingw-w64-x86_64.cmake
 cmake --build /build --parallel
