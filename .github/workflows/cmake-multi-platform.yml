@@ -94,9 +94,10 @@ jobs:
         path: ${{ matrix.platform.artifact }}
 
     - uses: softprops/action-gh-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       with:
+        body_path: ${{ github.workspace }}-CHANGELOG.txt
+        repository: Tarik366/Cont
         tag_name: continuous
         name: Continuous Build
         files: build/*
+        token: ${{ secrets.GH_TOKEN }}
