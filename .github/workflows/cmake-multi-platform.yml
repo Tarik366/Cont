@@ -74,13 +74,12 @@ jobs:
     - name: Archive (Linux)
       if: ${{ matrix.platform.os == 'linux' }}
       run: |
-        mkdir build/of
-        tar czf ${{ matrix.platform.artifact }} -C "${{ github.workspace }}/build/of" .
+        tar czf ${{ matrix.platform.artifact }} -C "${{ github.workspace }}/build/" .
 
     - name: Archive (Windows/macOS/Raspberry Pi)
       if: ${{ matrix.platform.os == 'windows' || matrix.platform.os == 'macos' || matrix.platform.os == 'raspberrypi0w' || matrix.platform.os == 'raspberrypizero2w' }}
       run: |
-        cd build/of
+        cd build/
         zip -r ../${{ matrix.platform.artifact }} .
 
     - name: Archive (Android)
@@ -106,5 +105,7 @@ jobs:
         repository: Tarik366/Cont
         tag_name: continuous
         name: Continuous Build
-        files: build/of/*
+        files: |
+          build/*.tar.gz
+          build/*.zip
         token: ${{ secrets.GH_TOKEN }}
