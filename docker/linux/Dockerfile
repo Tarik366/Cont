@@ -24,6 +24,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5
     && ./cmake-$CMAKE_VER-linux-$(uname -m).sh --prefix=/usr --skip-license
 
 RUN pwd && ls usr && ls
-RUN chmod +x /build.sh
+RUN chmod +x build.sh
 
-ENTRYPOINT [ "/build.sh" ]
+ENTRYPOINT [ "build.sh" ]
