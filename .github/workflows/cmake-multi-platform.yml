@@ -5,8 +5,12 @@ name: CMake on multiple platforms
 on:
   push:
     branches: [ "master" ]
+    paths-ignore:
+    - 'README.md'
   pull_request:
     branches: [ "master" ]
+    paths-ignore:
+    - 'README.md'
 
 jobs:
   build:
@@ -26,13 +30,18 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         build_type: [Release]
         c_compiler: [gcc, cl]
-        include:
+        cpp_compiler: [g++, cl]
+        platform:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
+            arch: x86_64
+            artifact: cont-win-x86_64.zip
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
+            arch: x86_64
+            artifact: cont-linux-x86_64.tar.gz
         exclude:
           - os: windows-latest
             c_compiler: gcc
@@ -43,12 +52,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install dependencies (Linux)
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt update
-        sudo apt install -y g++ libgl1-mesa-dev xorg-dev
+      with:
+        submodules: recursive
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
@@ -57,22 +62,54 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: >
-        cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -S ${{ github.workspace }}
 
-    - name: Build
-      # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+    - name: Install dependencies for cross-compiling
+      if: ${{ matrix.platform.arch != 'x86_64' && matrix.platform.os == 'linux' }}
+      run: sudo apt -y update && sudo apt -y install qemu-user-static binfmt-support
 
-    - name: Test
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest --build-config ${{ matrix.build_type }}
+    - name: Restore Docker cache
+      uses: actions/cache@v4
+      id: cache
+      with:
+        path: /var/lib/docker/overlay2
+        key: ${{ matrix.platform.os }}-${{ matrix.platform.arch }}
+
+    - name: Build Docker image
+      run: |
+        cd docker/${{ matrix.platform.os }}
+        docker build --build-arg ARCH=${{ matrix.platform.arch }} -t cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }} .
+
+    - name: Run Docker container
+      run: |
+        docker run -v "${{ github.workspace }}:/cont" -v "${{ github.workspace }}/build:/install" cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }}
+
+    - name: Archive (Linux)
+      if: ${{ matrix.platform.os == 'linux' }}
+      run: |
+        tar czf ${{ matrix.platform.artifact }} -C "${{ github.workspace }}/build" .
+
+    - name: Archive (Windows/macOS/Raspberry Pi)
+      if: ${{ matrix.platform.os == 'windows' || matrix.platform.os == 'macos' || matrix.platform.os == 'raspberrypi0w' || matrix.platform.os == 'raspberrypizero2w' }}
+      run: |
+        cd build
+        zip -r ../${{ matrix.platform.artifact }} .
+
+    - name: Archive (Android)
+      if: ${{ matrix.platform.os == 'android' }}
+      run: |
+        cp build/app-release.apk ${{ matrix.platform.artifact }}
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.platform.os }} ${{ matrix.platform.arch }}
+        path: ${{ matrix.platform.artifact }}
+
+    - name: Upload Continuous Release
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'Tarik366/Cont' }}
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        curl -fLOSs --retry 2 --retry-delay 60 https://github.com/probonopd/uploadtool/raw/master/upload.sh
+        bash upload.sh ${{ matrix.platform.artifact }}
