@@ -93,18 +93,27 @@ jobs:
         name: ${{ matrix.platform.os }} ${{ matrix.platform.arch }}
         path: ${{ matrix.platform.artifact }}
 
-    - name: Debug build output
-      run: |
-        echo "Workspace:"
-        ls -la
-        echo "Build dir:"
-        ls -la build || true
-    - uses: softprops/action-gh-release@v2
-      with:
-        body_path: ${{ github.workspace }}-CHANGELOG.txt
-        repository: Tarik366/Cont
-        tag_name: continuous
-        name: Continuous Build
-        files: |
-          *.zip
-        token: ${{ secrets.GH_TOKEN }}
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build aşamasında üretilen TÜM dosyaları indirir
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./release-artifacts
+          merge-multiple: true # Tüm zip dosyalarını tek klasöre toplar
+
+      - name: List files (Debug)
+        run: ls -R ./release-artifacts
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
+          repository: Tarik366/Cont
+          tag_name: continuous
+          name: Continuous Build
+          files: ./release-artifacts/*
+          token: ${{ secrets.GH_TOKEN }}
