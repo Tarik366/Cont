@@ -15,7 +15,7 @@ RUN if [ "${ARCH}" = "aarch64" ]; then export DEBARCH="arm64"; export DEBGCC="gc
     && apt -y install libgl1-mesa-dev:$DEBARCH \
     && apt -y install libegl-dev:$DEBARCH \
     && apt -y install libopengl-dev:$DEBARCH \
-    && apt -y install xorg-dev:$DEBARCH \
+    && apt -y install xorg-dev:$DEBARCH 
 
 # Install newer version of CMake
 ENV CMAKE_VER=3.31.5
