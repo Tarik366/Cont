@@ -1,0 +1,6 @@
+title: "Kont Kontrolcü"
+locale: "Türkçe"
+controller: 
+  controller_plugged: "Yeni Kontrolcü takıldı"
+  controller_unplugged: "Kontrolcü çıkartıldı"
+  

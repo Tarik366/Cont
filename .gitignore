@@ -1,0 +1,6 @@
+CMakeFiles/
+.vs
+_deps
+ContController/**
+x64/Debug
+build
