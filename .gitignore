@@ -1,6 +1,6 @@
 CMakeFiles/
-.vs
-_deps
+.vs/
+_deps/
 ContController/**
 x64/Debug
-build
+build/
