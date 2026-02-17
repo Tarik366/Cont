@@ -93,6 +93,12 @@ jobs:
         name: ${{ matrix.platform.os }} ${{ matrix.platform.arch }}
         path: ${{ matrix.platform.artifact }}
 
+    - name: Debug build output
+      run: |
+        echo "Workspace:"
+        ls -la
+        echo "Build dir:"
+        ls -la build || true
     - uses: softprops/action-gh-release@v2
       with:
         body_path: ${{ github.workspace }}-CHANGELOG.txt
