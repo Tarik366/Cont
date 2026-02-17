@@ -23,7 +23,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5
     && chmod +x cmake-$CMAKE_VER-linux-$(uname -m).sh \
     && ./cmake-$CMAKE_VER-linux-$(uname -m).sh --prefix=/usr --skip-license
 
-RUN find / -name build.sh
+RUN find . -name build.sh
 RUN chmod +x /cont/docker/linux/build.sh
 
 ENTRYPOINT [ "/cont/docker/linux/build.sh" ]
