@@ -48,7 +48,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt update
-        sudo apt install -y libgl1-mesa-dev xorg-dev
+        sudo apt install -y g++ libgl1-mesa-dev xorg-dev
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
