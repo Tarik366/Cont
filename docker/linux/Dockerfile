@@ -26,6 +26,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5
 RUN ls . \
     && ls .. \
     && ls ~
-RUN chmod +x /Cont/docker/linux/build.sh
+RUN chmod +x /cont/docker/linux/build.sh
 
-ENTRYPOINT [ "/Cont/docker/linux/build.sh" ]
+ENTRYPOINT [ "/cont/docker/linux/build.sh" ]
