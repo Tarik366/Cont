@@ -32,23 +32,16 @@ jobs:
         c_compiler: [gcc, cl]
         cpp_compiler: [g++, cl]
         platform:
-          - os: windows-latest
+          - os: windows
             c_compiler: cl
             cpp_compiler: cl
             arch: x86_64
-            artifact: cont-win-x86_64.zip
-          - os: ubuntu-latest
+            artifact: cont-windows-x86_64.zip
+          - os: linux
             c_compiler: gcc
             cpp_compiler: g++
             arch: x86_64
             artifact: cont-linux-x86_64.tar.gz
-        exclude:
-          - os: windows-latest
-            c_compiler: gcc
-          - os: windows-latest
-            c_compiler: clang
-          - os: ubuntu-latest
-            c_compiler: cl
 
     steps:
     - uses: actions/checkout@v4
