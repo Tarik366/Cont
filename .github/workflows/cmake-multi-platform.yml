@@ -66,7 +66,9 @@ jobs:
         
     - name: Run Docker container
       run: |
-        docker run -v "${{ github.workspace }}:/cont" -v "${{ github.workspace }}/build:/install" cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }}
+        docker run \
+        -v "${{ github.workspace }}/build:/install" \
+        cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }}
 
     - name: Archive (Linux)
       if: ${{ matrix.platform.os == 'linux' }}
