@@ -47,6 +47,7 @@ jobs:
     - name: Install dependencies (Linux)
       if: matrix.os == 'ubuntu-latest'
       run: |
+        sudo apt update
         sudo apt install -y libgl1-mesa-dev xorg-dev
 
     - name: Set reusable strings
