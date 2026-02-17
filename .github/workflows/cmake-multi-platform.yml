@@ -93,11 +93,10 @@ jobs:
         name: ${{ matrix.platform.os }} ${{ matrix.platform.arch }}
         path: ${{ matrix.platform.artifact }}
 
-    - name: Upload Continuous Release
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'Tarik366/Cont' }}
-      shell: bash
+    - uses: softprops/action-gh-release@v2
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        curl -fLOSs --retry 2 --retry-delay 60 https://github.com/probonopd/uploadtool/raw/master/upload.sh
-        bash upload.sh ${{ matrix.platform.artifact }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      with:
+        tag_name: continuous
+        name: Continuous Build
+        files: build/*
