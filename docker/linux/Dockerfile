@@ -21,6 +21,7 @@ RUN if [ "${ARCH}" = "aarch64" ]; then export DEBARCH="arm64"; export DEBGCC="gc
 ENV CMAKE_VER=3.31.5
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-$(uname -m).sh \
     && chmod +x cmake-$CMAKE_VER-linux-$(uname -m).sh \
-    && ./cmake-$CMAKE_VER-linux-$(uname -m).sh --prefix=/usr --skip-license
+    && ./cmake-$CMAKE_VER-linux-$(uname -m).sh --prefix=/usr --skip-license \
+    && chmod +x /cont/docker/linux/build.sh
 
 ENTRYPOINT [ "/cont/docker/linux/build.sh" ]
