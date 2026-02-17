@@ -105,5 +105,6 @@ jobs:
         repository: Tarik366/Cont
         tag_name: continuous
         name: Continuous Build
-        files: *.zip
+        files: |
+          *.zip
         token: ${{ secrets.GH_TOKEN }}
