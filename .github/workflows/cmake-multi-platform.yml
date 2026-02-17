@@ -74,6 +74,7 @@ jobs:
     - name: Archive (Linux)
       if: ${{ matrix.platform.os == 'linux' }}
       run: |
+        mkdir build/of
         tar czf ${{ matrix.platform.artifact }} -C "${{ github.workspace }}/build/of" .
 
     - name: Archive (Windows/macOS/Raspberry Pi)
