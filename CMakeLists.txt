@@ -42,3 +42,9 @@ target_link_libraries(ContController
     SDL3::SDL3
     OpenGL::GL
 )
+
+install(TARGETS ContController
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+)
