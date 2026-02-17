@@ -19,19 +19,21 @@ find_package(OpenGL REQUIRED)
 
 # ImGui
 add_library(imgui
-    include/imgui_b/imgui.cpp
-    include/imgui_b/imgui_draw.cpp
-    include/imgui_b/imgui_tables.cpp
-    include/imgui_b/imgui_widgets.cpp
-    include/imgui_b/backends/imgui_impl_sdl3.cpp
-    include/imgui_b/backends/imgui_impl_opengl3.cpp
-    include/imgui_b/imgui_demo.cpp
+    include/imgui/imgui.cpp
+    include/imgui/imgui_draw.cpp
+    include/imgui/imgui_tables.cpp
+    include/imgui/imgui_widgets.cpp
+    include/imgui/backends/imgui_impl_sdl3.cpp
+    include/imgui/backends/imgui_impl_opengl3.cpp
+    include/imgui/imgui_demo.cpp
 )
 
 target_include_directories(imgui PUBLIC
-    include/imgui_b
-    include/imgui_b/backends
+    include/imgui
+    include/imgui/backends
 )
+
+target_link_libraries(imgui PUBLIC SDL3::SDL3)
 
 add_executable(ContController src/main.cpp)
 
