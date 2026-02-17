@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.20)
 project(ContController)
 
 set(CMAKE_CXX_STANDARD 20)
+set(SDL_STATIC ON CACHE BOOL "" FORCE)
+set(SDL_SHARED OFF CACHE BOOL "" FORCE)
+# SDL3 uses another names sometime:
+set(SDL_STATIC_ENABLED_BY_DEFAULT ON)
 
 include(FetchContent)
 
@@ -48,3 +52,19 @@ install(TARGETS ContController
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
 )
+
+# Runtime bağımlılıklarını (DLL'ler vb.) yükle
+install(RUNTIME_DEPENDENCY_SET cont_runtime_deps
+    DESTINATION bin
+)
+
+# SDL3'ün runtime dosyalarını (DLL) yükleme klasörüne kopyalamasını sağla
+install(TARGETS ContController
+    RUNTIME DESTINATION .
+    BUNDLE DESTINATION .
+)
+
+# Eğer Windows ise SDL3.dll'i manuel kopyalamak gerekebilir (FetchContent kullandığın için)
+if(WIN32)
+    install(FILES $<TARGET_FILE:SDL3::SDL3> DESTINATION .)
+endif()
