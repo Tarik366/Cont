@@ -74,12 +74,12 @@ jobs:
     - name: Archive (Linux)
       if: ${{ matrix.platform.os == 'linux' }}
       run: |
-        tar czf ${{ matrix.platform.artifact }} -C "${{ github.workspace }}/build/build" .
+        tar czf ${{ matrix.platform.artifact }} -C "${{ github.workspace }}/build/bin" .
 
     - name: Archive (Windows/macOS/Raspberry Pi)
       if: ${{ matrix.platform.os == 'windows' || matrix.platform.os == 'macos' || matrix.platform.os == 'raspberrypi0w' || matrix.platform.os == 'raspberrypizero2w' }}
       run: |
-        cd build/build
+        cd build/bin
         zip -r ../${{ matrix.platform.artifact }} .
 
     - name: Archive (Android)
