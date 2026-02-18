@@ -22,13 +22,13 @@
 #include <string_view>
 #endif
 
-#include "yaml-cpp/binary.h"
-#include "yaml-cpp/node/impl.h"
-#include "yaml-cpp/node/iterator.h"
-#include "yaml-cpp/node/node.h"
-#include "yaml-cpp/node/type.h"
-#include "yaml-cpp/null.h"
-#include "yaml-cpp/fptostring.h"
+#include "yaml/binary.h"
+#include "yaml/node/impl.h"
+#include "yaml/node/iterator.h"
+#include "yaml/node/node.h"
+#include "yaml/node/type.h"
+#include "yaml/null.h"
+#include "yaml/fptostring.h"
 
 
 namespace YAML {

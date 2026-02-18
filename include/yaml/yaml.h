@@ -9,19 +9,19 @@
 
 // IWYU pragma: begin_exports
 
-#include "yaml-cpp/parser.h"
-#include "yaml-cpp/emitter.h"
-#include "yaml-cpp/emitterstyle.h"
-#include "yaml-cpp/stlemitter.h"
-#include "yaml-cpp/exceptions.h"
+#include "yaml/parser.h"
+#include "yaml/emitter.h"
+#include "yaml/emitterstyle.h"
+#include "yaml/stlemitter.h"
+#include "yaml/exceptions.h"
 
-#include "yaml-cpp/node/node.h"
-#include "yaml-cpp/node/impl.h"
-#include "yaml-cpp/node/convert.h"
-#include "yaml-cpp/node/iterator.h"
-#include "yaml-cpp/node/detail/impl.h"
-#include "yaml-cpp/node/parse.h"
-#include "yaml-cpp/node/emit.h"
+#include "yaml/node/node.h"
+#include "yaml/node/impl.h"
+#include "yaml/node/convert.h"
+#include "yaml/node/iterator.h"
+#include "yaml/node/detail/impl.h"
+#include "yaml/node/parse.h"
+#include "yaml/node/emit.h"
 
 // IWYU pragma: end_exports
 

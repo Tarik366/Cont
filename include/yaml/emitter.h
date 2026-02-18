@@ -20,13 +20,13 @@
 #include <string_view>
 #endif
 
-#include "yaml-cpp/binary.h"
-#include "yaml-cpp/dll.h"
-#include "yaml-cpp/emitterdef.h"
-#include "yaml-cpp/emittermanip.h"
-#include "yaml-cpp/null.h"
-#include "yaml-cpp/ostream_wrapper.h"
-#include "yaml-cpp/fptostring.h"
+#include "yaml/binary.h"
+#include "yaml/dll.h"
+#include "yaml/emitterdef.h"
+#include "yaml/emittermanip.h"
+#include "yaml/null.h"
+#include "yaml/ostream_wrapper.h"
+#include "yaml/fptostring.h"
 
 namespace YAML {
 class Binary;

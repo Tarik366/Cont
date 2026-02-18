@@ -9,9 +9,9 @@
 
 #include <stack>
 
-#include "yaml-cpp/anchor.h"
-#include "yaml-cpp/emitterstyle.h"
-#include "yaml-cpp/eventhandler.h"
+#include "yaml/anchor.h"
+#include "yaml/emitterstyle.h"
+#include "yaml/eventhandler.h"
 
 namespace YAML {
 struct Mark;

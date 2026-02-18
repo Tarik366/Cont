@@ -1,7 +1,7 @@
 #ifndef YAML_H_FPTOSTRING
 #define YAML_H_FPTOSTRING
 
-#include "yaml-cpp/dll.h"
+#include "yaml/dll.h"
 
 #include <string>
 

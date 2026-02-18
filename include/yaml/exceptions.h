@@ -7,9 +7,9 @@
 #pragma once
 #endif
 
-#include "yaml-cpp/mark.h"
-#include "yaml-cpp/noexcept.h"
-#include "yaml-cpp/traits.h"
+#include "yaml/mark.h"
+#include "yaml/noexcept.h"
+#include "yaml/traits.h"
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -171,7 +171,7 @@ class YAML_CPP_API Exception : public std::runtime_error {
     }
 
     std::stringstream output;
-    output << "yaml-cpp: error at line " << mark.line + 1 << ", column "
+    output << "yaml: error at line " << mark.line + 1 << ", column "
            << mark.column + 1 << ": " << msg;
     return output.str();
   }

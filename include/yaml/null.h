@@ -7,7 +7,7 @@
 #pragma once
 #endif
 
-#include "yaml-cpp/dll.h"
+#include "yaml/dll.h"
 #include <cstddef>
 
 namespace YAML {
