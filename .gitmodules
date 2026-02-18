@@ -1,3 +1,11 @@
 [submodule "imgui"]
 	path = include/imgui
 	url = https://github.com/ocornut/imgui.git
+
+[submodule "SDL"]
+	path = include/SDL3
+	url = https://github.com/libsdl-org/SDL
+
+[submodule "glad"]
+	path = include/glad
+	url = https://github.com/Dav1dde/glad
