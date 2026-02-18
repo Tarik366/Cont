@@ -81,9 +81,7 @@ jobs:
       if: ${{ matrix.platform.os == 'windows' || matrix.platform.os == 'macos' || matrix.platform.os == 'raspberrypi0w' || matrix.platform.os == 'raspberrypizero2w' }}
       run: |
         cd build/
-        rm ContController.exe # Removing duplicate exe
-        rm libSDL3.a # Removing SDL file
-        zip -r ../${{ matrix.platform.artifact }} .
+        zip -r ../${{ matrix.platform.artifact }} bin
 
     - name: Archive (Android)
       if: ${{ matrix.platform.os == 'android' }}
