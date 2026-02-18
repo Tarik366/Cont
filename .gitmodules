@@ -9,3 +9,7 @@
 [submodule "glad"]
 	path = include/glad
 	url = https://github.com/Dav1dde/glad
+
+[submodule "yaml"]
+	path = include/yaml
+	url = https://github.com/jbeder/yaml-cpp.git
