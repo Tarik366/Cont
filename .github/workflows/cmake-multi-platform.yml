@@ -47,6 +47,11 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
+    - name: Copy some files to build dir
+      id: copy
+      shell: bash
+      run: |
+        cp default_config.yaml build/default_config.yaml
 
     - name: Install dependencies for cross-compiling
       if: ${{ matrix.platform.arch != 'x86_64' && matrix.platform.os == 'linux' }}

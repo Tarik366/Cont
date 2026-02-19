@@ -16,10 +16,23 @@ FetchContent_Declare(
     GIT_TAG release-3.2.0   # sabit versiyon!
 )
 
+include(FetchContent)
+
+FetchContent_Declare(
+  yaml-cpp
+  GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+  GIT_TAG yaml-cpp-0.9.0 # Can be a tag (yaml-cpp-x.x.x), a commit hash, or a branch name (master)
+)
+FetchContent_MakeAvailable(yaml-cpp)
+
 FetchContent_MakeAvailable(SDL3)
 
 # OpenGL
 find_package(OpenGL REQUIRED)
+
+set(SOURCES src/)
+
+add_executable(ContController src/main.cpp)
 
 # ImGui
 add_library(imgui
@@ -37,14 +50,19 @@ target_include_directories(imgui PUBLIC
     include/imgui/backends
 )
 
-target_link_libraries(imgui PUBLIC SDL3::SDL3)
+target_include_directories(ContController PUBLIC 
+    "${PROJECT_SOURCE_DIR}/include"
+)
 
-add_executable(ContController src/main.cpp)
+include_directories(include/)
+
+target_link_libraries(imgui PUBLIC SDL3::SDL3)
 
 target_link_libraries(ContController
     imgui
     SDL3::SDL3
     OpenGL::GL
+    yaml-cpp::yaml-cpp
 )
 
 install(TARGETS ContController

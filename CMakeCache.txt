@@ -382,15 +382,6 @@ LibUSB_LINK_FLAGS:STRING=
 //Extra link libraries of LibUSB
 LibUSB_LINK_LIBRARIES:STRING=
 
-//Value Computed by CMake
-MyApp_BINARY_DIR:STATIC=/mnt/c/Users/Tarık/ContController
-
-//Value Computed by CMake
-MyApp_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-MyApp_SOURCE_DIR:STATIC=/mnt/c/Users/Tarık/ContController
-
 //Path to a file.
 OPENGL_EGL_INCLUDE_DIR:PATH=/usr/include
 
@@ -666,7 +657,7 @@ SDL_RPATH:BOOL=ON
 SDL_SENSOR:BOOL=ON
 
 //Build a shared version of the library
-SDL_SHARED:BOOL=ON
+SDL_SHARED:BOOL=OFF
 
 //Support the sndio audio API
 SDL_SNDIO:BOOL=ON
@@ -690,7 +681,7 @@ SDL_SSE4_1:BOOL=ON
 SDL_SSE4_2:BOOL=ON
 
 //Build a static version of the library
-SDL_STATIC:BOOL=OFF
+SDL_STATIC:BOOL=ON
 
 //Use iconv() from system-installed libraries
 SDL_SYSTEM_ICONV:BOOL=ON
@@ -1484,8 +1475,6 @@ HAVE_CLANG_COMMENT_BLOCK_COMMANDS:INTERNAL=
 HAVE_DLOPEN_IN_LIBC:INTERNAL=1
 //Have symbol elf_aux_info
 HAVE_ELF_AUX_INFO:INTERNAL=
-//Test HAVE_ENABLE_NEW_DTAGS
-HAVE_ENABLE_NEW_DTAGS:INTERNAL=1
 //Have symbol fdatasync
 HAVE_FDATASYNC:INTERNAL=1
 //Test HAVE_GCC_COMMENT_BLOCK_COMMANDS
