@@ -4,3 +4,5 @@ _deps/
 ContController/**
 x64/**
 build/
+*.a
+install/**
