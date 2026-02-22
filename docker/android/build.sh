@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 cd /cont/android
-gradlew -PbuildDir=/build assembleRelease
+chmod +x ./gradlew
+./gradlew -PbuildDir=/build assembleRelease
 zipalign -v -p 4 /build/outputs/apk/release/app-release-unsigned.apk /build/outputs/apk/release/app-release-unsigned-aligned.apk
 
 # If signing key is available, sign the APK
