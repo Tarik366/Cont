@@ -11,5 +11,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v$CMAKE_VER/cmake-$C
 
 COPY build.sh /build.sh
 RUN chmod +x /build.sh
+COPY ../../default_config.yaml ../../build/default_config.yaml
 
 ENTRYPOINT [ "/build.sh" ]

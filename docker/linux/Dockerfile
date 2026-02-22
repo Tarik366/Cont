@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:24.02
 
 ARG ARCH=x86_64
 ENV ARCH=${ARCH}
@@ -23,9 +23,8 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5
     && chmod +x cmake-$CMAKE_VER-linux-$(uname -m).sh \
     && ./cmake-$CMAKE_VER-linux-$(uname -m).sh --prefix=/usr --skip-license
 
-RUN gcc --version
-    
 COPY build.sh /build.sh
 RUN chmod +x /build.sh
+COPY ../../default_config.yaml ../../build/default_config.yaml
 
 ENTRYPOINT [ "/build.sh" ]

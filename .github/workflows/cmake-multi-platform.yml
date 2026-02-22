@@ -72,13 +72,6 @@ jobs:
         -v "${{ github.workspace }}:/cont" \
         -v "${{ github.workspace }}/build:/install" \
         cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }}
-    
-    - name: Copy some files to build dir
-      id: copy
-      shell: bash
-      run: |
-        ls
-        cp default_config.yaml build/default_config.yaml
 
     - name: Archive (Linux)
       if: ${{ matrix.platform.os == 'linux' }}
