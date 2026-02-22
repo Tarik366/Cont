@@ -1,4 +1,4 @@
-FROM debian:24.02
+FROM ubuntu:24.02
 
 ARG ARCH=x86_64
 ENV ARCH=${ARCH}
