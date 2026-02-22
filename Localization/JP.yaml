@@ -1,2 +1,6 @@
-title: "コント・コントローラー"
+title: "コント・コントロール"
 locale: "日本語"
+controller: 
+  controller_plugged: "新しいコントローラーが接続"
+  controller_unplugged: "コントローラーが取り外しました"
+  

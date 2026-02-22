@@ -1,5 +1,4 @@
 from socket import * 
-import vgamepad as vg
 
 """
 Outcoming packet:
@@ -9,14 +8,13 @@ Outcoming packet:
     RTSP stuff (video and audio)
 """
 
-serverName = "192.168.1.178" 
+serverName = gethostname()  
 serverPort = 648 
 serverSocket = socket(AF_INET, SOCK_DGRAM) 
 serverSocket.bind((serverName, serverPort)) 
 print ("\nThe server is ready to receive\n")  
 
-# Start the DualShock controller
-gamepad = vg.VDS4Gamepad()
+
 
 while 1:
     message, clientAddress = serverSocket.recvfrom(2048) 
