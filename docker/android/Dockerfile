@@ -30,6 +30,5 @@ ENV PATH="$PATH:/opt/gradlew:$ANDROID_HOME/cmdline-tools/tools/bin:/opt/android/
 
 COPY build.sh /build.sh
 RUN chmod +x /build.sh
-COPY ../../default_config.yaml ../../build/default_config.yaml
 
 ENTRYPOINT [ "/build.sh" ]
