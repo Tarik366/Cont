@@ -58,6 +58,12 @@ include_directories(include/)
 
 target_link_libraries(imgui PUBLIC SDL3::SDL3)
 
+if(ANDROID)
+    find_library(ANDROID_LOG_LIB log)
+    find_library(GLESV3_LIB GLESv3) # Android'de OpenGL ES kullanılır
+    target_link_libraries(ContController PRIVATE ${ANDROID_LOG_LIB} ${GLESV3_LIB})
+endif()
+
 target_link_libraries(ContController
     imgui
     SDL3::SDL3
