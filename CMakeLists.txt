@@ -7,6 +7,10 @@ if(ANDROID)
     set(SDL_STATIC OFF CACHE BOOL "Build static SDL library" FORCE)
     set(SDL_SHARED ON CACHE BOOL "Build shared SDL library" FORCE)
 endif()
+if(WIN32)
+    set(SDL3TTF_VENDORED ON CACHE BOOL "" FORCE)
+    set(SDL3TTF_HARFBUZZ ON CACHE BOOL "" FORCE)
+endif()
 
 include(FetchContent)
 
