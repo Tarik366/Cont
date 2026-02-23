@@ -39,10 +39,18 @@ if(ANDROID)
     find_library(GLES3_LIB GLESv3 REQUIRED)
     find_library(ANDROID_LOG_LIB log REQUIRED)
     find_library(ANDROID_LIB android REQUIRED)
+
+    target_link_libraries(imgui PUBLIC 
+        SDL3::SDL3 
+        ${ANDROID_LOG_LIB} 
+        ${ANDROID_LIB} 
+        ${GLES3_LIB}
+    )
     
     set(PLATFORM_LIBS ${GLES3_LIB} ${ANDROID_LOG_LIB} ${ANDROID_LIB})
 else()
     find_package(OpenGL REQUIRED)
+    target_link_libraries(imgui PUBLIC SDL3::SDL3)
     set(PLATFORM_LIBS OpenGL::GL)
 endif()
 
@@ -57,8 +65,6 @@ add_library(imgui
     $<$<BOOL:${ANDROID}>:include/imgui/backends/imgui_impl_android.cpp>
     include/imgui/imgui_demo.cpp
 )
-
-target_link_libraries(imgui PUBLIC SDL3::SDL3)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
