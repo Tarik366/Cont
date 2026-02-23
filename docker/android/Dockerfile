@@ -12,7 +12,7 @@ RUN mkdir -p /opt/android/cmdline-tools && \
     wget 'https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip' -P /tmp && \
     unzip -d /opt/android/cmdline-tools /tmp/commandlinetools-linux-6200805_latest.zip
 
-ENV ANDROID_NDK="25.1.8937393"
+ENV ANDROID_NDK="27.3.13750724"
 ENV SYSTEM_ARCH="x86_64"
 ENV BUILD_TOOLS="35.0.1"
 
