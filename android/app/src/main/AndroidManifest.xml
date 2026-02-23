@@ -62,9 +62,11 @@
 
          An example Java class can be found in README-android.md
     -->
+    
+    <!--HACK: Change roundIcon when is ready-->
     <application android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:allowBackup="true"
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="true" >
