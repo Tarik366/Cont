@@ -27,8 +27,14 @@ FetchContent_MakeAvailable(yaml-cpp)
 
 FetchContent_MakeAvailable(SDL3)
 
-# OpenGL
-find_package(OpenGL REQUIRED)
+if(NOT ANDROID)
+    # Opengl
+    find_package(OpenGL REQUIRED)
+else()
+    # OpenGLES
+    find_library(GLES3_LIB GLESv3 REQUIRED)
+    find_library(LOG_LIB log REQUIRED)     
+endif()
 
 set(SOURCES src/)
 
@@ -64,12 +70,29 @@ if(ANDROID)
     target_link_libraries(ContController PRIVATE ${ANDROID_LOG_LIB} ${GLESV3_LIB})
 endif()
 
-target_link_libraries(ContController
-    imgui
-    SDL3::SDL3
-    OpenGL::GL
-    yaml-cpp::yaml-cpp
-)
+if(ANDROID)
+    target_link_libraries(ContController
+        imgui
+        SDL3::SDL3
+        ${GLES3_LIB}
+        ${LOG_LIB}
+        android
+    )
+else()
+    target_link_libraries(ContController
+        imgui
+        SDL3::SDL3
+        OpenGL::GL
+    )
+endif()
+
+#ifdef __ANDROID__
+    // Android OpenGL ES 3
+    ImGui_ImplOpenGL3_Init("#version 300 es");
+#else
+    // Desktop OpenGL
+    ImGui_ImplOpenGL3_Init("#version 130");
+#endif
 
 install(TARGETS ContController
     RUNTIME DESTINATION bin
