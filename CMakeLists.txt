@@ -27,6 +27,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SDL3_image)
 
+# ---------- SDL3_ttf ----------
+FetchContent_Declare(
+    SDL3_ttf
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
+    GIT_TAG release-3.2.0
+)
+FetchContent_MakeAvailable(SDL3_ttf)
+
 # ---------- YAML ----------
 FetchContent_Declare(
   yaml-cpp
@@ -75,6 +83,7 @@ target_link_libraries(ContController
         yaml-cpp
         SDL3::SDL3
         SDL3_image::SDL3_image
+        SDL3_ttf::SDL3_ttf
         ${PLATFORM_LIBS}
 )
 
