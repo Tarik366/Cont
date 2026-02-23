@@ -49,22 +49,30 @@ add_library(imgui
     include/imgui/imgui_demo.cpp
 )
 
+target_link_libraries(imgui PUBLIC SDL3::SDL3)
+
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+add_executable(ContController ${SOURCES})
+
 target_include_directories(imgui PUBLIC
     include/imgui
     include/imgui/backends
 )
 
-target_link_libraries(imgui PUBLIC SDL3::SDL3)
+target_link_libraries(ContController
+    PRIVATE
+        imgui
+        yaml-cpp
+        ${PLATFORM_LIBS}
+        SDL3::SDL3
+)
 
 target_include_directories(ContController PUBLIC 
     "${PROJECT_SOURCE_DIR}/include"
 )
 
 include_directories(include/)
-
-set(SOURCES src/)
-
-add_executable(ContController ${SOURCES})
 
 if(NOT ANDROID)
     add_custom_command(TARGET ContController POST_BUILD
