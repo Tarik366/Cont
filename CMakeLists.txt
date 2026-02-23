@@ -87,10 +87,8 @@ else()
 endif()
 
 #ifdef __ANDROID__
-    // Android OpenGL ES 3
     ImGui_ImplOpenGL3_Init("#version 300 es");
 #else
-    // Desktop OpenGL
     ImGui_ImplOpenGL3_Init("#version 130");
 #endif
 
