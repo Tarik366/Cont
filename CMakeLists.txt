@@ -46,7 +46,7 @@ add_library(imgui
     include/imgui/imgui_widgets.cpp
     include/imgui/backends/imgui_impl_sdl3.cpp
     include/imgui/backends/imgui_impl_opengl3.cpp
-    include/imgui/backends/imgui_impl_android.cpp
+    $<$<BOOL:${ANDROID}>:include/imgui/backends/imgui_impl_android.cpp>
     include/imgui/imgui_demo.cpp
 )
 
