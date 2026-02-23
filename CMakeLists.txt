@@ -32,10 +32,10 @@ if(ANDROID)
     find_library(ANDROID_LOG_LIB log REQUIRED)
     find_library(ANDROID_LIB android REQUIRED)
     
-    set(PLATFORM_LIBS ${GLES3_LIB} ${ANDROID_LOG_LIB} ${ANDROID_LIB} SDL3::SDL3-static)
+    set(PLATFORM_LIBS ${GLES3_LIB} ${ANDROID_LOG_LIB} ${ANDROID_LIB})
 else()
     find_package(OpenGL REQUIRED)
-    set(PLATFORM_LIBS OpenGL::GL SDL3::SDL3)
+    set(PLATFORM_LIBS OpenGL::GL)
 endif()
 
 # ImGui
@@ -50,11 +50,7 @@ add_library(imgui
     include/imgui/imgui_demo.cpp
 )
 
-if(ANDROID)
-    target_link_libraries(imgui PUBLIC SDL3::SDL3-static)
-else()
-    target_link_libraries(imgui PUBLIC SDL3::SDL3)
-endif()
+target_link_libraries(imgui PUBLIC SDL3::SDL3)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
@@ -69,6 +65,7 @@ target_link_libraries(ContController
     PRIVATE
         imgui
         yaml-cpp
+        SDL3::SDL3
         ${PLATFORM_LIBS}
 )
 
