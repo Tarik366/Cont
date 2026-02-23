@@ -71,6 +71,7 @@ jobs:
         docker run \
         -v "${{ github.workspace }}:/cont" \
         -v "${{ github.workspace }}/build:/install" \
+        -e ANDROID_SIGNING_KEY=${{ secrets.ANDROID_SIGNING_KEY }}
         cont-${{ matrix.platform.os }}-${{ matrix.platform.arch }}
 
     - name: Archive (Linux)
