@@ -11,12 +11,13 @@ android {
     if (buildAsApplication) {
         namespace "com.tarik366.cont"
     }
+    ndkVersion "27.3.13750724"
     compileSdkVersion 34
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         externalNativeBuild {
             // ndkBuild {
             //     arguments "APP_PLATFORM=android-19"

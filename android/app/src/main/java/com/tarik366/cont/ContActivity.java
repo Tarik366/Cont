@@ -12,7 +12,7 @@ public class ContActivity extends SDLActivity {
 			// "SDL3_net",
 			"SDL3_ttf",
 			"xml2",
-			"vanilla"
+			"cont"
 		};
 	}
 }
