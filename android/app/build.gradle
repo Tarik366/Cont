@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     namespace "com.tarik366.cont"
     compileSdk 35
+    ndkVersion "27.3.13750724"
 
     defaultConfig {
         applicationId "com.tarik366.cont"
