@@ -7,10 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SDL_STATIC OFF CACHE BOOL "Build static SDL library" FORCE)
 set(SDL_SHARED ON CACHE BOOL "Build shared SDL library" FORCE)
 
-if(WIN32)
-    set(SDL3TTF_VENDORED OFF CACHE BOOL "" FORCE)
-    set(SDL3TTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
-endif()
+set(SDL3TTF_VENDORED OFF CACHE BOOL "" FORCE)
+set(SDL3TTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
 
 include(FetchContent)
 
@@ -36,6 +34,7 @@ FetchContent_Declare(
     SDL3_ttf
     GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
     GIT_TAG release-3.2.0
+    GIT_SUBMODULES "external/freetype" 
 )
 FetchContent_MakeAvailable(SDL3_ttf)
 
