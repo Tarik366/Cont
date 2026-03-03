@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SDL_STATIC OFF CACHE BOOL "Build static SDL library" FORCE)
 set(SDL_SHARED ON CACHE BOOL "Build shared SDL library" FORCE)
 
+set(SDL3TTF_VENDORED ON CACHE BOOL "Use vendored FreeType" FORCE)
 set(SDL3TTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
 
 include(FetchContent)
@@ -34,6 +35,7 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
     GIT_TAG release-3.2.0
     GIT_SUBMODULES "external/freetype" 
+    GIT_SUBMODULES "external/harfbuzz"
 )
 FetchContent_MakeAvailable(SDL3_ttf)
 
