@@ -35,7 +35,6 @@ FetchContent_Declare(
     SDL3_ttf
     GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
     GIT_TAG release-3.2.0
-    GIT_SUBMODULES_RECURSIVE ON
 )
 FetchContent_MakeAvailable(SDL3_ttf)
 
