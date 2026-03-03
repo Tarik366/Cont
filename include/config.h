@@ -12,7 +12,7 @@ class Config {
                 std::cerr << "Default config file missing. Please reinstall app from github.com";
             }
             if (fs::exists("config.yaml")){
-                std::cout << "Loading config file";
+                std::cout << "Loading config file \n";
                 conf_table = YAML::LoadFile("config.yaml");
             }
             else {

@@ -12,13 +12,13 @@ using namespace hv;
 
 void sendPacket() {
     Config config;
-    const char* remote_host = config.conf_table["connection"]["host"].as<std::string>().c_str(); 
+    const std::string remote_host = config.conf_table["connection"]["host"].as<std::string>(); 
     int remote_port = config.conf_table["connection"]["port"].as<int>();
 
-    printf("%s:%i", remote_host, remote_port);
+    printf("%s:%i \n", remote_host, remote_port);
 
     UdpClient cli;
-    int sockfd = cli.createsocket(remote_port, remote_host);
+    int sockfd = cli.createsocket(remote_port, remote_host.c_str());
     if (sockfd < 0) {
         return throw std::runtime_error(std::format("Socket cannot created"));
     }
