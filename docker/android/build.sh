@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+
 cd /cont/android
 chmod +x ./gradlew
 ./gradlew -PbuildDir=/build assembleRelease
