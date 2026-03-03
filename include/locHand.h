@@ -46,7 +46,6 @@ struct TextProxy {
     }
 
     const char* c_str() const {
-        cout << node.as<string>("").c_str();
         return node.as<string>("").c_str();
     }
 };
