@@ -3,10 +3,10 @@ project(ContController)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-if(ANDROID)
-    set(SDL_STATIC OFF CACHE BOOL "Build static SDL library" FORCE)
-    set(SDL_SHARED ON CACHE BOOL "Build shared SDL library" FORCE)
-endif()
+
+set(SDL_STATIC OFF CACHE BOOL "Build static SDL library" FORCE)
+set(SDL_SHARED ON CACHE BOOL "Build shared SDL library" FORCE)
+
 if(WIN32)
     set(SDL3TTF_VENDORED OFF CACHE BOOL "" FORCE)
     set(SDL3TTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
@@ -43,9 +43,17 @@ FetchContent_MakeAvailable(SDL3_ttf)
 FetchContent_Declare(
   yaml-cpp
   GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
-  GIT_TAG yaml-cpp-0.9.0 # Can be a tag (yaml-cpp-x.x.x), a commit hash, or a branch name (master)
+  GIT_TAG yaml-cpp-0.9.0
 )
 FetchContent_MakeAvailable(yaml-cpp)
+
+# ---------- LibHV ----------
+FetchContent_Declare(
+  libhv
+  GIT_REPOSITORY https://github.com/ithewei/libhv.git
+  GIT_TAG v1.3.4 
+)
+FetchContent_MakeAvailable(libhv)
 
 if(ANDROID)
     find_library(GLES3_LIB GLESv3 REQUIRED)
@@ -70,11 +78,13 @@ add_library(imgui
     include/imgui/imgui_demo.cpp
 )
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+add_executable(ContController 
+    src/main.cpp
+    src/ui.cpp
+    src/connection.cpp
+)
 
-add_executable(ContController ${SOURCES})
-
-    target_link_libraries(imgui PUBLIC SDL3::SDL3 ${PLATFORM_LIBS})
+target_link_libraries(imgui PUBLIC SDL3::SDL3 ${PLATFORM_LIBS})
 
 target_include_directories(imgui PUBLIC
     include/imgui
@@ -85,6 +95,7 @@ target_link_libraries(ContController
     PRIVATE
         imgui
         yaml-cpp
+        hv
         SDL3::SDL3
         SDL3_image::SDL3_image
         SDL3_ttf::SDL3_ttf
